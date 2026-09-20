@@ -1,0 +1,25 @@
+# IndexNow keys and payload: whoever holds one can submit URLs for this domain
+indexnow-key.txt
+.indexnow.json
+*.txt
+!robots.txt
+
+# superseded builds kept locally while the design was iterated
+build.v*.js
+data.v*.js
+
+# abandoned approaches, unreferenced by any page
+assets/frames/
+assets/strip/
+
+# superseded footage: the synthesised pans and the two-clip merges
+assets/video/*-old-synth.mp4
+assets/video/pair*.mp4
+
+# Pages-era file; the Worker handles redirects now
+_redirects
+
+# local noise
+node_modules/
+.DS_Store
+Thumbs.db
