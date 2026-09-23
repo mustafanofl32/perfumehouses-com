@@ -7,8 +7,7 @@
 <meta name="description" content="2 Emerging perfume houses in the index, founded between 2012 and 2013: Nishane, Zoologist Perfumes. Houses founded after 2010.">
 <link rel="canonical" href="https://perfumehouses.com/traditions/emerging">
 <meta name="color-scheme" content="light dark">
-<meta name="theme-color" media="(prefers-color-scheme: light)" content="#F7F4ED">
-<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0A0A0B">
+<meta name="theme-color" content="#F7F4ED">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Perfume Houses">
 <meta property="og:url" content="https://perfumehouses.com/traditions/emerging">
@@ -16,7 +15,7 @@
 <meta property="og:description" content="2 Emerging perfume houses in the index, founded between 2012 and 2013: Nishane, Zoologist Perfumes. Houses founded after 2010.">
 <meta property="og:image" content="https://perfumehouses.com/assets/img/emerging.jpg">
 <meta name="twitter:card" content="summary_large_image">
-<script>(function(){try{var t=localStorage.getItem('ph-sale')==='off'&&document.documentElement.setAttribute('data-sale','off');localStorage.getItem('ph-theme');if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t)}catch(e){}})()</script>
+<script>(function(){try{if(localStorage.getItem('ph-sale')==='off')document.documentElement.setAttribute('data-sale','off');var t=localStorage.getItem('ph-theme');if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t)}catch(e){}})()</script>
 <link rel="icon" type="image/png" sizes="32x32" href="/assets/brand/mark-32.png">
 <link rel="icon" type="image/png" sizes="64x64" href="/assets/brand/mark-64.png">
 <link rel="apple-touch-icon" href="/assets/brand/mark-180.png">
@@ -24,7 +23,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono&family=Instrument+Sans:wght@400;500;600&family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&display=swap">
-<link rel="stylesheet" href="/assets/site.css?v=e3a615e4">
+<link rel="stylesheet" href="/assets/site.css?v=391e36f2">
 <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Perfume Houses","item":"https://perfumehouses.com/"},{"@type":"ListItem","position":2,"name":"Traditions","item":"https://perfumehouses.com/traditions"},{"@type":"ListItem","position":3,"name":"Emerging","item":"https://perfumehouses.com/traditions/emerging"}]},{"@type":"CollectionPage","name":"Emerging perfume houses","url":"https://perfumehouses.com/traditions/emerging","mainEntity":{"@type":"ItemList","numberOfItems":2,"itemListElement":[{"@type":"ListItem","position":1,"name":"Nishane","url":"https://perfumehouses.com/houses/nishane"},{"@type":"ListItem","position":2,"name":"Zoologist Perfumes","url":"https://perfumehouses.com/houses/zoologist"}]}}]}</script>
 </head>
 <body>
@@ -133,16 +132,16 @@
 <script>
 (function(){
   var b=document.getElementById('theme'); if(!b) return;
-  var root=document.documentElement, mq=window.matchMedia('(prefers-color-scheme: dark)');
-  function current(){ return root.getAttribute('data-theme') || (mq.matches ? 'dark' : 'light'); }
+  var root=document.documentElement, meta=document.querySelector('meta[name="theme-color"]');
+  function current(){ return root.getAttribute('data-theme') === 'dark' ? 'dark' : 'light'; }   // light unless the visitor chose dark
   function label(){ var d=current()==='dark'; b.setAttribute('aria-label', d ? 'Switch to light theme' : 'Switch to dark theme'); b.setAttribute('aria-pressed', d?'true':'false'); }
   b.addEventListener('click', function(){
     var next=current()==='dark' ? 'light' : 'dark';
     root.setAttribute('data-theme', next);
     try{ localStorage.setItem('ph-theme', next); }catch(e){}
+    if(meta) meta.setAttribute('content', next==='dark' ? '#0A0A0B' : '#F7F4ED');
     label();
   });
-  if(mq.addEventListener) mq.addEventListener('change', label);
   label();
 })();
 </script>

@@ -100,20 +100,20 @@ const ICON = {
   arrow: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="width:18px;height:18px"><path d="M5 12h14M13 6l6 6-6 6"/></svg>`
 };
 
-const THEME_HEAD = `<script>(function(){try{var t=localStorage.getItem('ph-sale')==='off'&&document.documentElement.setAttribute('data-sale','off');localStorage.getItem('ph-theme');if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t)}catch(e){}})()</script>`;
+const THEME_HEAD = `<script>(function(){try{if(localStorage.getItem('ph-sale')==='off')document.documentElement.setAttribute('data-sale','off');var t=localStorage.getItem('ph-theme');if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t)}catch(e){}})()</script>`;
 const THEME_BODY = `<script>
 (function(){
   var b=document.getElementById('theme'); if(!b) return;
-  var root=document.documentElement, mq=window.matchMedia('(prefers-color-scheme: dark)');
-  function current(){ return root.getAttribute('data-theme') || (mq.matches ? 'dark' : 'light'); }
+  var root=document.documentElement, meta=document.querySelector('meta[name="theme-color"]');
+  function current(){ return root.getAttribute('data-theme') === 'dark' ? 'dark' : 'light'; }   // light unless the visitor chose dark
   function label(){ var d=current()==='dark'; b.setAttribute('aria-label', d ? 'Switch to light theme' : 'Switch to dark theme'); b.setAttribute('aria-pressed', d?'true':'false'); }
   b.addEventListener('click', function(){
     var next=current()==='dark' ? 'light' : 'dark';
     root.setAttribute('data-theme', next);
     try{ localStorage.setItem('ph-theme', next); }catch(e){}
+    if(meta) meta.setAttribute('content', next==='dark' ? '#0A0A0B' : '#F7F4ED');
     label();
   });
-  if(mq.addEventListener) mq.addEventListener('change', label);
   label();
 })();
 </script>`;
@@ -137,8 +137,7 @@ function shell({title, desc, canonical, body, jsonld, current, ogImage, script, 
 <meta name="description" content="${esc(desc)}">
 <link rel="canonical" href="${canonical}">${noindex ? '<meta name="robots" content="noindex, follow">' : ""}
 <meta name="color-scheme" content="light dark">
-<meta name="theme-color" media="(prefers-color-scheme: light)" content="#F7F4ED">
-<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0A0A0B">
+<meta name="theme-color" content="#F7F4ED">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Perfume Houses">
 <meta property="og:url" content="${canonical}">
@@ -569,7 +568,7 @@ ${stage(photo.page("acquire"), `
       <h2>What comes with it</h2>
       <ul>
         <li><strong>The name.</strong> perfumehouses.com, registered and clean — no trade mark dispute, no penalty history, nothing to unwind.</li>
-        <li><strong>The site on it.</strong> ${houses.length} researched entries, ${cats.length} tradition pages, a timeline, and the code that builds them. Yours if you want it, deleted if you do not.</li>
+        <li><strong>The site on it.</strong> ${houses.length} researched entries, ${cats.length} tradition pages, a timeline, and the code that builds them &mdash; all of it public at <a href="https://github.com/mustafanofl32/perfumehouses-com" rel="noopener">github.com/mustafanofl32/perfumehouses-com</a>, so you can read it before you buy. Yours if you want it, deleted if you do not.</li>
         <li><strong>A head start with Google.</strong> Indexed, a submitted sitemap, clean URLs and structured data already in place. A new domain starts from nothing; this one does not.</li>
       </ul>
 
