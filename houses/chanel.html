@@ -15,7 +15,7 @@
 <meta property="og:description" content="Chanel: French perfume house, founded in 1921 by Gabrielle Chanel with Ernest Beaux. Known for N°5 and Coromandel.">
 <meta property="og:image" content="https://perfumehouses.com/assets/img/fashion-house.jpg">
 <meta name="twitter:card" content="summary_large_image">
-<script>(function(){try{if(localStorage.getItem('ph-sale')==='off')document.documentElement.setAttribute('data-sale','off');var t=localStorage.getItem('ph-theme');if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t)}catch(e){}})()</script>
+<script>(function(){try{if(localStorage.getItem('ph-sale')==='off')document.documentElement.setAttribute('data-sale','off');var t=localStorage.getItem('ph-theme-v2');if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t)}catch(e){}})()</script>
 <link rel="icon" type="image/png" sizes="32x32" href="/assets/brand/mark-32.png">
 <link rel="icon" type="image/png" sizes="64x64" href="/assets/brand/mark-64.png">
 <link rel="apple-touch-icon" href="/assets/brand/mark-180.png">
@@ -115,7 +115,7 @@
   b.addEventListener('click', function(){
     var next=current()==='dark' ? 'light' : 'dark';
     root.setAttribute('data-theme', next);
-    try{ localStorage.setItem('ph-theme', next); }catch(e){}
+    try{ localStorage.setItem('ph-theme-v2', next); }catch(e){}
     if(meta) meta.setAttribute('content', next==='dark' ? '#0A0A0B' : '#F7F4ED');
     label();
   });

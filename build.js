@@ -100,7 +100,7 @@ const ICON = {
   arrow: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="width:18px;height:18px"><path d="M5 12h14M13 6l6 6-6 6"/></svg>`
 };
 
-const THEME_HEAD = `<script>(function(){try{if(localStorage.getItem('ph-sale')==='off')document.documentElement.setAttribute('data-sale','off');var t=localStorage.getItem('ph-theme');if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t)}catch(e){}})()</script>`;
+const THEME_HEAD = `<script>(function(){try{if(localStorage.getItem('ph-sale')==='off')document.documentElement.setAttribute('data-sale','off');var t=localStorage.getItem('ph-theme-v2');if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t)}catch(e){}})()</script>`;
 const THEME_BODY = `<script>
 (function(){
   var b=document.getElementById('theme'); if(!b) return;
@@ -110,7 +110,7 @@ const THEME_BODY = `<script>
   b.addEventListener('click', function(){
     var next=current()==='dark' ? 'light' : 'dark';
     root.setAttribute('data-theme', next);
-    try{ localStorage.setItem('ph-theme', next); }catch(e){}
+    try{ localStorage.setItem('ph-theme-v2', next); }catch(e){}
     if(meta) meta.setAttribute('content', next==='dark' ? '#0A0A0B' : '#F7F4ED');
     label();
   });
