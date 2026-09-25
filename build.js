@@ -469,9 +469,13 @@ ${stage(p, `
     crumbs([["Perfume Houses", "/"], ["Traditions", "/traditions"], [h.cat, catUrl(h.cat)], [h.name, houseUrl(h)]]),
     jsonld
   ] };
-  const fullTitle = `${h.name} (perfume house) | Perfume Houses`;
+  /* longest search title that fits in 60 characters; names that already say "Perfumes" or
+     "Parfums" do not get "perfume house" added on top */
+  const lead = /perfum|parfum/i.test(h.name) ? `${h.name}:` : `${h.name} perfume house:`;
+  const title = [`${lead} history and fragrances | Perfume Houses`, `${lead} history and fragrances`,
+    `${h.name}: history and fragrances`, `${h.name} (perfume house)`].find(t => t.length <= 60) || h.name;
 
-  return shell({ title: fullTitle.length > 60 ? `${h.name} (perfume house)` : fullTitle, desc, canonical, body, jsonld: graph, current: "houses", ogImage: p.src });
+  return shell({ title, desc, canonical, body, jsonld: graph, current: "houses", ogImage: p.src });
 }
 
 /* ------------------------------------------------------- tradition page */
@@ -499,7 +503,7 @@ ${stage(p, `
 </div>
 `;
   return shell({
-    title: `${c} perfume houses | Perfume Houses`, canonical, body, current: "traditions", ogImage: p.src,
+    title: `${/house$/i.test(c) ? `${c} perfume brands` : `${c} perfume houses and brands`} | Perfume Houses`, canonical, body, current: "traditions", ogImage: p.src,
     desc: catDesc(c, list),
     jsonld: { "@context": "https://schema.org", "@graph": [crumbs([["Perfume Houses", "/"], ["Traditions", "/traditions"], [c, catUrl(c)]]),
       { "@type": "CollectionPage", name: `${c} perfume houses`, url: canonical,
